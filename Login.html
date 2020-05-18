@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Netabel - login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      var metaData = {
+        userId: "",
+        username: "",
+        brand: "Netabel",
+      };
+      var featureToggles = {};
+      var featureToggleOverrides = {};
+    </script>
+    
+    
+    
+    <style>
+        .tableCellRoot {
+            padding: 0 !important;
+        }
+    </style>
+    
+<script>
+window['_fs_debug'] = false;
+window['_fs_host'] = 'fullstory.com';
+window['_fs_script'] = 'edge.fullstory.com/s/fs.js';
+window['_fs_org'] = 'V9JXB';
+window['_fs_namespace'] = 'FS';
+(function(m,n,e,t,l,o,g,y){
+    if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
+    g=m[e]=function(a,b,s){g.q?g.q.push([a,b,s]):g._api(a,b,s);};g.q=[];
+    o=n.createElement(t);o.async=1;o.crossOrigin='anonymous';o.src='https://'+_fs_script;
+    y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+    g.identify=function(i,v,s){g(l,{uid:i},s);if(v)g(l,v,s)};g.setUserVars=function(v,s){g(l,v,s)};g.event=function(i,v,s){g('event',{n:i,p:v},s)};
+    g.anonymize=function(){g.identify(!!0)};
+    g.shutdown=function(){g("rec",!1)};g.restart=function(){g("rec",!0)};
+    g.log = function(a,b){g("log",[a,b])};
+    g.consent=function(a){g("consent",!arguments.length||a)};
+    g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+    g.clearUserCookie=function(){};
+    g._w={};y='XMLHttpRequest';g._w[y]=m[y];y='fetch';g._w[y]=m[y];
+    if(m[y])m[y]=function(){return g._w[y].apply(this,arguments)};
+    g._v="1.2.0";
+})(window,document,window['_fs_namespace'],'script','user');
+</script>        
+    
+</head>
+    <body>
+    
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+	
+    <div class="card" style="max-width: 550px; margin: 0 auto">
+  <div>
+    <h1>Login</h1>
+    
+    <form action="/login" method="POST" id="login_form">
+        <div>
+            <label class="form-label">Username</label>
+            <div class="form-input-container">
+                <input id="username" class="form-input" name="username" value="">
+                <span class="errorLabel" id="usernameInvalidError" style="display: none">Bad username</span>
+            </div>
+        </div>
+        <div>
+            <label class="form-label">Password</label>
+            <div class="form-input-container">
+                <input id="password" class="form-input" name="password" type="password" value="">
+                <span class="errorLabel" id="passwordShortError" style="display: none">Too short</span>
+                <span class="errorLabel" id="passwordInvalidError" style="display: none">Bad password</span>
+            </div>
+        </div>
+        <div style="padding-top: 30px">
+            <input class="button raised-button submit-button" id="submit" type="submit" value="Login">
+        </div>
+    </form>
+  </div>
+</div>
+<script>
+  var isPerstine = true;
+  var form = document.querySelector('#login_form');
+  form.addEventListener('submit', onSubmitLogin);
+  
+  var submitElement = document.querySelector('#submit');
+
+  var usernameElement = document.querySelector('#username');
+  usernameElement.addEventListener('input', validateUsername);
+  
+  var passwordElement = document.querySelector('#password');
+  passwordElement.addEventListener('input', validatePassword);
+
+  function validateUsername() {
+    if (isPerstine) {
+      return;
+    }
+
+    document.querySelector('#usernameInvalidError').style.display = "none";
+    var username = usernameElement.value.trim().toLowerCase();
+    if (username.length < 2) {
+      document.querySelector('#usernameInvalidError').style.display = "inline-block";
+      return false;
+    }
+    if (username.length > 40) {
+      document.querySelector('#usernameInvalidError').style.display = "inline-block";
+      return false;
+    }
+
+    return true;
+  }
+
+  function validatePassword() {
+    if (isPerstine) {
+      return;
+    }
+
+    document.querySelector('#passwordShortError').style.display = "none";
+    document.querySelector('#passwordInvalidError').style.display = "none";
+    var password = passwordElement.value.trim();
+    if (password.length < 2) {
+      document.querySelector('#passwordShortError').style.display = "inline-block";
+      return false;
+    }
+    if (password.length > 40) {
+      document.querySelector('#passwordInvalidError').style.display = "inline-block";
+      return false;
+    }
+
+
+    return true;
+  }
+
+  function onSubmitLogin(e) {
+    isPerstine = false;
+    if (!validateUsername() || !validatePassword()) {
+      e.preventDefault();
+      return;
+    }
+    submitElement.disabled = true;
+  }
+</script>
+
+    </body>
+</html>
